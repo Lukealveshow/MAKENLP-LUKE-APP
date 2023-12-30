@@ -5,7 +5,7 @@ from generation import generate_answer
 from database import insert_data
 
 # Carrega os segredos do arquivo secrets.toml
-st.secrets.load_secrets("C:/Users/segte/Downloads/coding/coding/MAKENLP_APP10/.streamlit/secrets.toml")
+#st.secrets.load_secrets("C:/Users/segte/Downloads/coding/coding/MAKENLP_APP10/.streamlit/secrets.toml")
 db_secrets = st.secrets["connections.mysql"]
 db_username = db_secrets["username"]
 db_password = db_secrets["password"]
