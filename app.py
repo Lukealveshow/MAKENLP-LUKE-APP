@@ -4,9 +4,6 @@ from summarization import summarize_text
 from generation import generate_answer
 from database import insert_data
 
-# Initialize connection.
-conn = st.connection('mysql', type='sql', **db_secrets)
-
 def translate_page(language):
     # Using deep_translator for page translation
     translator = GoogleTranslator(source='auto', target=language)
