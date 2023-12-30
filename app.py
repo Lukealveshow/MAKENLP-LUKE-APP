@@ -4,9 +4,6 @@ from summarization import summarize_text
 from generation import generate_answer
 from database import insert_data
 
-# Carrega os segredos do arquivo secrets.toml
-db_username = db_secrets["username"]
-db_password = db_secrets["password"]
 # Initialize connection.
 conn = st.connection('mysql', type='sql', **db_secrets)
 
