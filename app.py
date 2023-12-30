@@ -2,12 +2,15 @@ import streamlit as st
 from deep_translator import GoogleTranslator
 from summarization import summarize_text
 from generation import generate_answer
-from server import insert_data
+from database import insert_data
 
-db_secrets = st.secrets("connections.mysql")
-
+# Carrega os segredos do arquivo secrets.toml
+st.secrets.load_secrets("C:/Users/segte/Downloads/coding/coding/MAKENLP_APP10/.streamlit/secrets.toml")
+db_secrets = st.secrets["connections.mysql"]
 db_username = db_secrets["username"]
 db_password = db_secrets["password"]
+# Initialize connection.
+conn = st.connection('mysql', type='sql', **db_secrets)
 
 def translate_page(language):
     # Using deep_translator for page translation
@@ -63,8 +66,8 @@ def translate_page(language):
         answer = generate_answer(question, text_generation)
         translated_text = GoogleTranslator(source='auto', target=language).translate(text_translation)
 
-        # Utilize db_username e db_password conforme necessário
-        insert_data(db_username, db_password, name, age, gender, text_summarization, summarized_text, text_generation,
+        # Utilize a função insert_data do database.py
+        insert_data(name, age, gender, text_summarization, summarized_text, text_generation,
                     question, answer, text_translation, language, translated_text)
         st.success(translator.translate("Dados inseridos com sucesso!"))
 
