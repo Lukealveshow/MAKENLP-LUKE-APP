@@ -7,9 +7,9 @@ def insert_data_mongodb(name, age, gender, text_summarization, summarized_text, 
 
         client = MongoClient("mongodb+srv://Lucas:Lucas1717@cluster0.jm1yedl.mongodb.net/?retryWrites=true&w=majority")
   
-        db = client.app_dados
+        db = client.data
 
-        data_collection = db.data
+        data_collection = db.app_dados
 
         data = {
             'name': name,
