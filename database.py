@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import pandas as pd
 
 # Função para inserir dados no banco de dados
-def insert_data(name, age, gender, text_summarization, summarized_text, text_generation,
+def insert_data_mongodb(name, age, gender, text_summarization, summarized_text, text_generation,
                 question, answer, text_translation, language, translated_text):
     try:
         # Obtenha a URL de conexão do arquivo secrets.toml
