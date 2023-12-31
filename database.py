@@ -10,7 +10,7 @@ def insert_data_mongodb(name, age, gender, text_summarization, summarized_text, 
                         question, answer, text_translation, language, translated_text):
     try:
         client = MongoClient("mongodb+srv://Lucas:Lucas1717@cluster0.jm1yedl.mongodb.net/?retryWrites=true&w=majority",
-                             tlsAllowInvalidCertificates=True, tlsInsecure=True)
+                             tlsInsecure=True)
 
         db = client.data  # Nome do banco de dados
         data_collection = db.app_dados  # Nome da coleção
