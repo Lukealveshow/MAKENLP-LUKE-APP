@@ -7,14 +7,11 @@ ssl_ctx = ssl.create_default_context()
 ssl_ctx.check_hostname = False
 ssl_ctx.verify_mode = ssl.CERT_NONE
 def insert_data_mongodb(name, age, gender, text_summarization, summarized_text, text_generation,
-                question, answer, text_translation, language, translated_text):
+                        question, answer, text_translation, language, translated_text):
     try:
-        ssl_ctx = ssl.create_default_context()
-        ssl_ctx.check_hostname = False
-        ssl_ctx.verify_mode = ssl.CERT_NONE
+        client = MongoClient("mongodb+srv://Lucas:Lucas1717@cluster0.jm1yedl.mongodb.net/?retryWrites=true&w=majority",
+                             tlsAllowInvalidCertificates=True, tlsInsecure=True)
 
-        client = MongoClient("mongodb+srv://Lucas:Lucas1717@cluster0.jm1yedl.mongodb.net/?retryWrites=true&w=majority", ssl_context=ssl_ctx)
-  
         db = client.data  # Nome do banco de dados
         data_collection = db.app_dados  # Nome da coleção
 
@@ -35,6 +32,6 @@ def insert_data_mongodb(name, age, gender, text_summarization, summarized_text, 
         data_collection.insert_one(data)
 
         st.success("Dados inseridos com sucesso!")
-    
+
     except Exception as e:
         st.error(f"Erro ao inserir dados: {e}")
