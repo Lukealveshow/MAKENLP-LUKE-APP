@@ -4,13 +4,6 @@ from summarization import summarize_text
 from generation import generate_answer
 from database import insert_data
 
-# Carrega os segredos do arquivo secrets.toml
-db_secrets = st.secrets["connections.mysql"]
-db_username = db_secrets["username"]
-db_password = db_secrets["password"]
-# Initialize connection.
-conn = st.connection('mysql', type='sql', **db_secrets)
-
 def translate_page(language):
     # Using deep_translator for page translation
     translator = GoogleTranslator(source='auto', target=language)
