@@ -3,7 +3,7 @@ import streamlit as st
 from deep_translator import GoogleTranslator
 from summarization import summarize_text
 from generation import generate_answer
-from database import get_mongo_client, insert_data_mongodb
+from database2 import get_mongo_client, insert_data_mongodb
 
 # Obter o cliente MongoDB
 mongo_client = get_mongo_client()
