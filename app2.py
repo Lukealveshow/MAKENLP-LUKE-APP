@@ -43,7 +43,26 @@ def translate_page(language):
     translated_question = translator.translate("Faça uma pergunta sobre o texto:")
     question = st.text_input(translated_question, key='question')
 
-    # Restante do código...
+    # Button to generate answer
+    if st.button(translator.translate("Gerar Resposta")):
+        answer = generate_answer(question, text_generation)
+        st.subheader(translator.translate("Resposta Gerada"))
+        st.write(answer)
+
+    # Section for text input and language selection
+    translated_text_trans = translator.translate("Digite o texto para traduzir:")
+    st.subheader(translated_text_trans)
+    text_translation = st.text_area("", height=150, key='text_translation')
+    
+    translated_lang = translator.translate("Selecione o idioma de destino:")
+    language_options = ['en', 'es', 'fr', 'pt']
+    language = st.selectbox(translated_lang, options=language_options, key='language')
+
+    # Button to translate text
+    if st.button(translator.translate("Traduzir Texto")):
+        translated_text = GoogleTranslator(source='auto', target=language).translate(text_translation)
+        st.subheader(translator.translate("Texto Traduzido"))
+        st.write(translated_text)
 
     # Button to execute all functions and insert into the database
     if st.button(translator.translate("Enviar")):
