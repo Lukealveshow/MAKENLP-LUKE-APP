@@ -1,19 +1,20 @@
 import streamlit as st
 from pymongo import MongoClient
-import ssl
 
-# Criação do contexto SSL personalizado
-ssl_ctx = ssl.create_default_context()
-ssl_ctx.check_hostname = False
-ssl_ctx.verify_mode = ssl.CERT_NONE
 def insert_data_mongodb(name, age, gender, text_summarization, summarized_text, text_generation,
-                        question, answer, text_translation, language, translated_text):
+                question, answer, text_translation, language, translated_text):
     try:
-        client = MongoClient("mongodb+srv://Lucas:Lucas1717@cluster0.jm1yedl.mongodb.net/?retryWrites=true&w=majority",
-                             tlsInsecure=True)
-
-        db = client.data  # Nome do banco de dados
-        data_collection = db.app_dados  # Nome da coleção
+        # Acesse as informações do MongoDB diretamente
+        client = MongoClient(
+            host=st.secrets["mongo"]["host"],
+            port=st.secrets["mongo"]["port"],
+            username=st.secrets["mongo"]["username"],
+            password=st.secrets["mongo"]["password"],
+            ssl=True,
+        )
+  
+        db = client.app_dados
+        data_collection = db.data
 
         data = {
             'name': name,
@@ -32,6 +33,6 @@ def insert_data_mongodb(name, age, gender, text_summarization, summarized_text, 
         data_collection.insert_one(data)
 
         st.success("Dados inseridos com sucesso!")
-
+    
     except Exception as e:
         st.error(f"Erro ao inserir dados: {e}")
